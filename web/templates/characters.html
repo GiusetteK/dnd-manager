@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Characters - D&D Manager{% endblock %}
+
+{% block content %}
+<h1>Characters</h1>
+
+<div class="action-buttons">
+    <a href="{{ url_for('new_character') }}" class="btn btn-primary">Create Character</a>
+    <a href="{{ url_for('new_character') }}?generate=true" class="btn btn-secondary">Generate Random</a>
+</div>
+
+{% if characters %}
+<div class="character-grid">
+    {% for character in characters %}
+    <div class="character-card">
+        <h3>{{ character.name }}</h3>
+        <p class="level">Level {{ character.level }} {{ character.race }}</p>
+        <p class="class">{{ character.class }}</p>
+        <p class="hp">HP: {{ character.hp }}</p>
+        <a href="{{ url_for('view_character', name=character.name) }}" class="btn">View</a>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No characters yet. <a href="{{ url_for('new_character') }}">Create one!</a></p>
+{% endif %}
+{% endblock %}

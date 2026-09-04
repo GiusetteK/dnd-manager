@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Home - D&D Manager{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Welcome to D&D Manager</h1>
+    <p>Your all-in-one tool for managing D&D campaigns, characters, and battles</p>
+</div>
+
+<div class="features">
+    <div class="feature-card">
+        <h3>👤 Character Management</h3>
+        <p>Create and manage your D&D characters with full stats and progression</p>
+        <a href="{{ url_for('characters') }}" class="btn">Manage Characters</a>
+    </div>
+
+    <div class="feature-card">
+        <h3>📖 Campaigns</h3>
+        <p>Organize your campaigns, track quests, NPCs, and sessions</p>
+        <a href="{{ url_for('campaigns') }}" class="btn">Manage Campaigns</a>
+    </div>
+
+    <div class="feature-card">
+        <h3>⚔️ Battle Simulator</h3>
+        <p>Simulate combat encounters with dice rolls and mechanics</p>
+        <a href="#" class="btn">Start Battle</a>
+    </div>
+</div>
+{% endblock %}

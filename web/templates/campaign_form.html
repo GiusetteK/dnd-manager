@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Create Campaign - D&D Manager{% endblock %}
+
+{% block content %}
+<h1>Create Campaign</h1>
+
+<form id="campaignForm" class="form">
+    <div class="form-group">
+        <label for="name">Campaign Name</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="gm">Game Master</label>
+        <input type="text" id="gm" name="gm" required>
+    </div>
+
+    <div class="form-group">
+        <label for="setting">Setting</label>
+        <input type="text" id="setting" name="setting" value="Forgotten Realms">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="5"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Campaign</button>
+</form>
+
+<script>
+document.getElementById('campaignForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    
+    const response = await fetch('{{ url_for("new_campaign") }}', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    });
+    
+    if (response.ok) {
+        alert('Campaign created!');
+        window.location.href = '{{ url_for("campaigns") }}';
+    }
+});
+</script>
+{% endblock %}

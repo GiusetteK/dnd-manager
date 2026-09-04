@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Campaigns - D&D Manager{% endblock %}
+
+{% block content %}
+<h1>Campaigns</h1>
+
+<div class="action-buttons">
+    <a href="{{ url_for('new_campaign') }}" class="btn btn-primary">Create Campaign</a>
+</div>
+
+{% if campaigns %}
+<div class="campaign-grid">
+    {% for campaign in campaigns %}
+    <div class="campaign-card">
+        <h3>{{ campaign.name }}</h3>
+        <p class="gm">GM: {{ campaign.game_master }}</p>
+        <p class="setting">{{ campaign.setting }}</p>
+        <p class="meta">Level {{ campaign.party_level }} | {{ campaign.sessions }} Sessions</p>
+        <p class="status">{{ campaign.status }}</p>
+        <a href="{{ url_for('view_campaign', name=campaign.name) }}" class="btn">View</a>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No campaigns yet. <a href="{{ url_for('new_campaign') }}">Create one!</a></p>
+{% endif %}
+{% endblock %}
